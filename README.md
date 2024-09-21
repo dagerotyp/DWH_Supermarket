@@ -1,6 +1,8 @@
 # DWH_Supermarket
 This is the Data Warehouse project that I've been working on during the EPAM Data Analytics engineering for Supermarket Chain using PostgreSQL
 
+To buld DWH in PostgreSQL follow the steps included in _build_dwh_script.sql_ file.
+
 # Project Summary:
 The primary objective of this project is to create a concept data warehouse using dimensional modelling techniques (Inmon and Kimball). Identify the key stakeholders and business requirements. Based on these requirements develop a design schema for the data warehouse. In the next step data warehouse was implemented using PostgreSQL. Based on build DWH create a PowerBI report to get meaninful insights.
 
@@ -21,7 +23,7 @@ Implementing a data warehouse should help client to answer you the following que
 -	If there are any differences between in sales for different brands
 
 # Datasets
-Datasets comes from online and offline sales and are present in /DataSources 
+Datasets comes from online and offline sales. There is also a SALES_OFFLINE_INC dataset which is used for implementation of incremental loading
 
 **SALES_OFFLINE.CSV**
 The first dataset contains the following information about sales in stationary shops.
