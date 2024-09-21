@@ -1,0 +1,40 @@
+CREATE SCHEMA IF NOT EXISTS BL_3NF;
+
+-- GENERATE SEQUENCE FOR PK OF CE_CUSTOMERS
+CREATE SEQUENCE IF NOT EXISTS BL_3NF.SEQ_CE_CUSTOMER_ID START 1;
+
+CREATE TABLE IF NOT EXISTS BL_3NF.CE_CUSTOMERS (
+	customer_id BIGINT PRIMARY KEY,
+	first_name VARCHAR(255) NOT NULL,
+	last_name VARCHAR(255) NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	phone_number VARCHAR(255) NOT NULL,
+	gender VARCHAR(255) NOT NULL,
+	birthdate_dt DATE NOT NULL,
+	source_system VARCHAR(255) NOT NULL,
+	source_entity VARCHAR(255) NOT NULL,
+	customer_src_id VARCHAR(255) NOT NULL,
+	insert_dt DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	update_dt DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- CONNECT SEQUENCE WITH PK OF CE_CUSTOMERS
+ALTER SEQUENCE BL_3NF.SEQ_CE_CUSTOMER_ID OWNED BY BL_3NF.CE_CUSTOMERS.CUSTOMER_ID;
+
+-- INSERT DEFAULT ROW
+INSERT INTO BL_3NF.CE_CUSTOMERS (customer_id, first_name, last_name, email, phone_number, gender, birthdate_dt, customer_src_id, source_system, source_entity, insert_dt, update_dt) 
+SELECT -1 AS id,
+		'n. a.',
+		'n. a.',
+		'n. a.',
+		'n. a.',
+		'n. a.',
+		'1990-01-01'::TIMESTAMP,
+		'n. a.',
+		'MANUAL',
+		'MANUAL',
+		'1990-01-01'::TIMESTAMP,
+		'1990-01-01'::TIMESTAMP
+WHERE NOT EXISTS (SELECT 1 FROM BL_3NF.CE_CUSTOMERS WHERE customer_id = -1);
+
+COMMIT;
